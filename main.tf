@@ -20,6 +20,13 @@ resource "azurerm_key_vault" "this" {
   enabled_for_disk_encryption     = var.enabled_for_disk_encryption
   enabled_for_template_deployment = var.enabled_for_template_deployment
 
+  network_acls {
+    bypass                     = var.bypass_network_acls ? "AzureServices" : "None"
+    default_action             = var.allow_default_action_network_acls ? "Allow" : "Deny"
+    ip_rules                   = var.network_acls_ip_rules
+    virtual_network_subnet_ids = var.network_acls_virtual_network_subnet_ids
+  }
+
   tags = var.tags
 }
 

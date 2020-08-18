@@ -5,6 +5,7 @@ This Terraform module is used to create an [Azure Key Vault](https://azure.micro
 - A new resource group (optional) - if the `create_resource_group` variable is set to `true`
 - An Azure Key Vault
 - One or more access policies for the above key vault (each access policy requires `key_permissions` and `secret_permissions` along with an `object_id`)
+- The network acls for the key vault ("Allow" or "Deny" according to `network_acls_ip_rules` and `network_acls_virtual_network_subnet_ids` variables) 
 
 # Getting Started
 
@@ -57,12 +58,16 @@ Possible values to be set for `certificate_permissions` inside the `access_polic
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | access\_policies | Define Key Vault Access Policies. 'azurerm\_key\_vault\_access\_policy' requires 'key\_permissions' and 'secret\_permissions'. An empty 'object\_id' defaults to the current one. | <pre>list(object({<br>    object_id               = string<br>    key_permissions         = list(string)<br>    secret_permissions      = list(string)<br>    certificate_permissions = list(string)<br>  }))</pre> | <pre>[<br>  {<br>    "certificate_permissions": [],<br>    "key_permissions": [<br>      "get"<br>    ],<br>    "object_id": "",<br>    "secret_permissions": [<br>      "get"<br>    ]<br>  }<br>]</pre> | no |
+| allow\_default\_action\_network\_acls | Boolean flag to use 'Allow' as the Default Action when no rules match from ip\_rules / virtual\_network\_subnet\_ids. | `bool` | `false` | no |
+| bypass\_network\_acls | Boolean flag to specify if AzureServices traffic can bypass the network rules. | `bool` | `false` | no |
 | create\_resource\_group | Controls if a new resource group should be created. | `bool` | `true` | no |
 | enabled\_for\_deployment | Boolean flag to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault. | `bool` | `false` | no |
 | enabled\_for\_disk\_encryption | Boolean flag to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys. | `bool` | `false` | no |
 | enabled\_for\_template\_deployment | Boolean flag to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault. | `bool` | `false` | no |
 | key\_vault\_name | Specifies the name of the Key Vault. | `string` | n/a | yes |
 | location | Specifies the supported Azure location where the resource exists. | `string` | `"West Europe"` | no |
+| network\_acls\_ip\_rules | One or more IP Addresses, or CIDR Blocks which should be able to access the Key Vault. | `list(string)` | `[]` | no |
+| network\_acls\_virtual\_network\_subnet\_ids | One or more Subnet ID's which should be able to access this Key Vault. | `list(string)` | `[]` | no |
 | resource\_group\_name | The name of the resource group in which to create the Key Vault. | `string` | n/a | yes |
 | sku\_name | The Name of the SKU used for this Key Vault. Possible values: 'standard' or 'premium'. | `string` | `"standard"` | no |
 | tags | A mapping of tags to assign to all resources. | `map(string)` | `{}` | no |

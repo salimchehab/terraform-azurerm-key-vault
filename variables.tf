@@ -56,6 +56,30 @@ variable "enabled_for_template_deployment" {
   default     = false
 }
 
+variable "bypass_network_acls" {
+  description = "Boolean flag to specify if AzureServices traffic can bypass the network rules."
+  type        = bool
+  default     = false
+}
+
+variable "allow_default_action_network_acls" {
+  description = "Boolean flag to use 'Allow' as the Default Action when no rules match from ip_rules / virtual_network_subnet_ids."
+  type        = bool
+  default     = false
+}
+
+variable "network_acls_ip_rules" {
+  description = "One or more IP Addresses, or CIDR Blocks which should be able to access the Key Vault."
+  type        = list(string)
+  default     = []
+}
+
+variable "network_acls_virtual_network_subnet_ids" {
+  description = "One or more Subnet ID's which should be able to access this Key Vault."
+  type        = list(string)
+  default     = []
+}
+
 variable "access_policies" {
   description = "Define Key Vault Access Policies. 'azurerm_key_vault_access_policy' requires 'key_permissions' and 'secret_permissions'. An empty 'object_id' defaults to the current one."
   type = list(object({
