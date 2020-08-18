@@ -1,11 +1,11 @@
 # Introduction 
 
-This Terraform module is used to create an [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/). This modules creates the following resources:
+This Terraform module is used to create an [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/). This module creates the following resources:
 
 - A new resource group (optional) - if the `create_resource_group` variable is set to `true`
-- An Azure Key Vault
-- One or more access policies for the above key vault (each access policy requires `key_permissions` and `secret_permissions` along with an `object_id`)
-- The network acls for the key vault ("Allow" or "Deny" according to `network_acls_ip_rules` and `network_acls_virtual_network_subnet_ids` variables) 
+- An Azure Key Vault along with:
+    - One or more access policies for the above key vault (each access policy requires `key_permissions` and `secret_permissions` along with an `object_id`)
+    - The network acls for the key vault ("Allow" or "Deny" according to `network_acls_ip_rules` and `network_acls_virtual_network_subnet_ids` variables) 
 
 # Getting Started
 
