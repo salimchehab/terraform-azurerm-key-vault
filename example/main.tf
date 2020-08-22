@@ -14,9 +14,10 @@ module "test-key-vault" {
       key_permissions         = ["get"]
       secret_permissions      = ["get"]
       certificate_permissions = []
+      storage_permissions     = []
     },
     {
-      object_id = "30cd449f-c134-15e8-ad0f-189245e7f007"
+      object_id = "10000000-2000-3000-4000-500000000000"
       key_permissions = [
         "get",
         "list",

@@ -12,10 +12,10 @@ This Terraform module is used to create an [Azure Key Vault](https://azure.micro
 The [example](./example) folder contains a basic setup for using this module. In order to use a service principal, the following environment variables can be exported: 
 
 ```
-export ARM_CLIENT_ID=xxx
-export ARM_CLIENT_SECRET=xxx
-export ARM_SUBSCRIPTION_ID=xxx
-export ARM_TENANT_ID=xxx
+$ export ARM_CLIENT_ID="00000000-0000-0000-0000-000000000000"
+$ export ARM_CLIENT_SECRET="00000000-0000-0000-0000-000000000000"
+$ export ARM_SUBSCRIPTION_ID="00000000-0000-0000-0000-000000000000"
+$ export ARM_TENANT_ID="00000000-0000-0000-0000-000000000000"
 ```
 
 The following example outputs will be populated after a `terraform apply`:
@@ -57,7 +57,7 @@ Possible values to be set for `certificate_permissions` inside the `access_polic
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| access\_policies | Define Key Vault Access Policies. 'azurerm\_key\_vault\_access\_policy' requires 'key\_permissions' and 'secret\_permissions'. An empty 'object\_id' defaults to the current one. | <pre>list(object({<br>    object_id               = string<br>    key_permissions         = list(string)<br>    secret_permissions      = list(string)<br>    certificate_permissions = list(string)<br>  }))</pre> | <pre>[<br>  {<br>    "certificate_permissions": [],<br>    "key_permissions": [<br>      "get"<br>    ],<br>    "object_id": "",<br>    "secret_permissions": [<br>      "get"<br>    ]<br>  }<br>]</pre> | no |
+| access\_policies | Define Key Vault Access Policies. 'azurerm\_key\_vault\_access\_policy' requires 'key\_permissions' and 'secret\_permissions'. An empty 'object\_id' defaults to the current one. | <pre>list(object({<br>    object_id               = string<br>    key_permissions         = list(string)<br>    secret_permissions      = list(string)<br>    certificate_permissions = list(string)<br>  }))</pre> | <pre>[<br>  {<br>    "certificate_permissions": [],<br>    "key_permissions": [<br>      "get"<br>    ],<br>    "object_id": "",<br>    "secret_permissions": [<br>      "get"<br>    ],<br>    "storage_permissions": []<br>  }<br>]</pre> | no |
 | allow\_default\_action\_network\_acls | Boolean flag to use 'Allow' as the Default Action when no rules match from ip\_rules / virtual\_network\_subnet\_ids. | `bool` | `false` | no |
 | bypass\_network\_acls | Boolean flag to specify if AzureServices traffic can bypass the network rules. | `bool` | `false` | no |
 | create\_resource\_group | Controls if a new resource group should be created. | `bool` | `true` | no |

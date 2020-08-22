@@ -41,4 +41,5 @@ resource "azurerm_key_vault_access_policy" "this" {
   key_permissions         = lookup(var.access_policies[count.index], "key_permissions")
   secret_permissions      = lookup(var.access_policies[count.index], "secret_permissions")
   certificate_permissions = lookup(var.access_policies[count.index], "certificate_permissions", null)
+  storage_permissions     = lookup(var.access_policies[count.index], "storage_permissions", null)
 }

@@ -94,6 +94,7 @@ variable "access_policies" {
       key_permissions         = ["get"]
       secret_permissions      = ["get"]
       certificate_permissions = []
+      storage_permissions     = []
     }
   ]
 }
