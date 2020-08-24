@@ -88,13 +88,5 @@ variable "access_policies" {
     secret_permissions      = list(string)
     certificate_permissions = list(string)
   }))
-  default = [
-    {
-      object_id               = ""
-      key_permissions         = ["get"]
-      secret_permissions      = ["get"]
-      certificate_permissions = []
-      storage_permissions     = []
-    }
-  ]
+  default = []
 }
